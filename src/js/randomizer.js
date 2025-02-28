@@ -120,7 +120,7 @@ window.addEventListener('load', function() {
     "pic/TECvps" + IMG_SUFFIX
   ];
 
-  const ADVANCEDTECHS = [
+  var ADVANCEDTECHS = [
     "pic/ADVfedP" + IMG_SUFFIX,
     "pic/ADVfedV" + IMG_SUFFIX,
     "pic/ADVgai" + IMG_SUFFIX,
@@ -138,7 +138,7 @@ window.addEventListener('load', function() {
     "pic/ADVtyp" + IMG_SUFFIX
   ];
 
-  const ROUNDBOOSTERS = [
+  var ROUNDBOOSTERS = [
     "pic/BOOgai" + IMG_SUFFIX,
     "pic/BOOknw" + IMG_SUFFIX,
     "pic/BOOlab" + IMG_SUFFIX,
@@ -493,6 +493,92 @@ window.addEventListener('load', function() {
       alert('Copy permalink to clipboard');
     })();
   });
+
+  document.getElementById('lostfleet').addEventListener('click', function() {
+    document.getElementById('lostfleet').style.background = "yellow";
+    // document.getElementById('basegame').style.background = "none";
+    document.getElementById('basegame').style.removeProperty('background');
+     ROUNDBOOSTERS = [
+      "pic/BOOdsc" + IMG_SUFFIX,
+      "pic/BOOgai" + IMG_SUFFIX,
+      "pic/BOOgfm" + IMG_SUFFIX,
+      "pic/BOOknw" + IMG_SUFFIX,
+      "pic/BOOlab" + IMG_SUFFIX,
+      "pic/BOOmin" + IMG_SUFFIX,
+      "pic/BOOnav" + IMG_SUFFIX,
+      "pic/BOOpia" + IMG_SUFFIX,
+      "pic/BOOpwt" + IMG_SUFFIX,
+      "pic/BOOqic" + IMG_SUFFIX,
+      "pic/BOOter" + IMG_SUFFIX,
+      "pic/BOOtgp" + IMG_SUFFIX,
+      "pic/BOOtrs" + IMG_SUFFIX,
+      "pic/BOOtyp" + IMG_SUFFIX
+    ];
+
+     ADVANCEDTECHS = [
+      "pic/ADVast" + IMG_SUFFIX,
+      "pic/ADVbbuV" + IMG_SUFFIX,
+      "pic/ADVdsc" + IMG_SUFFIX,
+      "pic/ADVdscV" + IMG_SUFFIX,
+      "pic/ADVfedP" + IMG_SUFFIX,
+      "pic/ADVfedV" + IMG_SUFFIX,
+      "pic/ADVgai" + IMG_SUFFIX,
+      "pic/ADVknw" + IMG_SUFFIX,
+      "pic/ADVlab" + IMG_SUFFIX,
+      "pic/ADVminB" + IMG_SUFFIX,
+      "pic/ADVminV" + IMG_SUFFIX,
+      "pic/ADVore" + IMG_SUFFIX,
+      "pic/ADVqacB" + IMG_SUFFIX,
+      "pic/ADVqic" + IMG_SUFFIX,
+      "pic/ADVsecO" + IMG_SUFFIX,
+      "pic/ADVsecV" + IMG_SUFFIX,
+      "pic/ADVstp" + IMG_SUFFIX,
+      "pic/ADVterB" + IMG_SUFFIX,
+      "pic/ADVtrsB" + IMG_SUFFIX,
+      "pic/ADVtrsV" + IMG_SUFFIX,
+      "pic/ADVtyp" + IMG_SUFFIX
+    ];
+    setup();
+  });
+
+  document.getElementById('basegame').addEventListener('click', function() {
+    document.getElementById('lostfleet').style.removeProperty('background');
+    // document.getElementById('lostfleet').style.background = "none";
+    document.getElementById('basegame').style.background = "yellow";
+
+     ROUNDBOOSTERS = [
+      "pic/BOOgai" + IMG_SUFFIX,
+      "pic/BOOknw" + IMG_SUFFIX,
+      "pic/BOOlab" + IMG_SUFFIX,
+      "pic/BOOmin" + IMG_SUFFIX,
+      "pic/BOOnav" + IMG_SUFFIX,
+      "pic/BOOpia" + IMG_SUFFIX,
+      "pic/BOOpwt" + IMG_SUFFIX,
+      "pic/BOOqic" + IMG_SUFFIX,
+      "pic/BOOter" + IMG_SUFFIX,
+      "pic/BOOtrs" + IMG_SUFFIX
+    ];
+
+     ADVANCEDTECHS = [
+      "pic/ADVfedP" + IMG_SUFFIX,
+      "pic/ADVfedV" + IMG_SUFFIX,
+      "pic/ADVgai" + IMG_SUFFIX,
+      "pic/ADVknw" + IMG_SUFFIX,
+      "pic/ADVlab" + IMG_SUFFIX,
+      "pic/ADVminB" + IMG_SUFFIX,
+      "pic/ADVminV" + IMG_SUFFIX,
+      "pic/ADVore" + IMG_SUFFIX,
+      "pic/ADVqic" + IMG_SUFFIX,
+      "pic/ADVsecO" + IMG_SUFFIX,
+      "pic/ADVsecV" + IMG_SUFFIX,
+      "pic/ADVstp" + IMG_SUFFIX,
+      "pic/ADVtrsB" + IMG_SUFFIX,
+      "pic/ADVtrsV" + IMG_SUFFIX,
+      "pic/ADVtyp" + IMG_SUFFIX
+    ];
+    setup();
+  });
+
 
   //
   //
