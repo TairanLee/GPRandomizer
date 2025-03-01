@@ -1,5 +1,6 @@
-const GPRandomizer = {};
-
+var GPRandomizer = {};
+// var mapCssFile = "map.css";
+var losFunc;
 //
 // Menu Select
 //
@@ -23,6 +24,7 @@ GPRandomizer.BoardState = (function () {
   return {
     players: '',
     federation: '',
+    thelostfleet: false,
     advancedTechs: [],
     basicTechs: [],
     roundScores: [],
@@ -47,6 +49,7 @@ GPRandomizer.BoardState = (function () {
     clearBoardState: function () {
       this.players = '';
       this.federation = '';
+      this.thelostfleet = false,
       this.advancedTechs = [];
       this.basicTechs = [];
       this.roundScores = [];
@@ -73,11 +76,33 @@ GPRandomizer.Map = {
     console.debug('[GPRandomizer.Map.generateRandomMap]', 'players =>', players);
   },
 
+  // resizeMapVerticalGridLength: function() {
+  //   let map = document.getElementById(this.boardId);
+  //   let unit = (map.clientWidth / 20) / 2;
+  //   map.style.gridTemplateRows = (unit + 'px ').repeat(30);
+  //   map.style.setProperty('-ms-grid-rows', (unit + 'px').repeat(30));
+  // },
   resizeMapVerticalGridLength: function() {
     let map = document.getElementById(this.boardId);
-    let unit = (map.clientWidth / 20) / 2;
-    map.style.gridTemplateRows = (unit + 'px ').repeat(30);
-    map.style.setProperty('-ms-grid-rows', (unit + 'px').repeat(30));
+    let gridHeight;
+    let gridWidth;
+    if (GPRandomizer.BoardState.thelostfleet) {
+      gridWidth = Math.floor((map.clientWidth / 29) / 2);
+      gridHeight = Math.ceil(Math.sqrt(3) * ((map.clientWidth / 29) / 2));
+      // map.style.gridTemplateColumns = "repeat(58, 1fr);";
+      map.style.gridTemplateRows = (gridHeight + 'px ').repeat(34);
+      map.style.gridTemplateColumns = "repeat(auto-fill, " + gridWidth + "px);";
+      map.style.setProperty('-ms-grid-rows', (gridHeight + 'px').repeat(34));
+    } else {
+      console.log(GPRandomizer.BoardState.thelostfleet);
+      gridHeight = Math.ceil((map.clientWidth / 20) / 2);
+      // map.style.gridTemplateColumns = "repeat(20, 1fr);";
+      map.style.gridTemplateRows = (gridHeight + 'px ').repeat(30);
+      map.style.setProperty('-ms-grid-rows', (gridHeight + 'px').repeat(30));
+    }
+    console.debug(map.style);
+    console.debug('[GPRandomizer.Map.generateRandomMap]', 'clientWidth =>', map.clientWidth);
+    console.debug('[GPRandomizer.Map.generateRandomMap]', 'gridHeight =>', gridHeight);
   }
 };
 
@@ -96,7 +121,7 @@ window.addEventListener('load', function() {
     "pic/FEDvps" + IMG_SUFFIX
   ];
 
-  const ROUNDSCORES = [
+  var ROUNDSCORES = [
     "pic/RNDfed" + IMG_SUFFIX,
     "pic/RNDgai3" + IMG_SUFFIX,
     "pic/RNDgai4" + IMG_SUFFIX,
@@ -151,7 +176,7 @@ window.addEventListener('load', function() {
     "pic/BOOtrs" + IMG_SUFFIX
   ];
 
-  const FINALSCORES = [
+  var FINALSCORES = [
     "pic/FINbld" + IMG_SUFFIX,
     "pic/FINfed" + IMG_SUFFIX,
     "pic/FINgai" + IMG_SUFFIX,
@@ -160,7 +185,7 @@ window.addEventListener('load', function() {
     "pic/FINtyp" + IMG_SUFFIX
   ];
 
-  const SPACESECTORS = {
+  var SPACESECTORS = {
     '4': [
       'pic/1' + IMG_SUFFIX,
       'pic/2' + IMG_SUFFIX,
@@ -330,29 +355,35 @@ window.addEventListener('load', function() {
   //
   // add external css for map
   //
-  function addMapCss() {
-    if (!document.querySelector('[data-map-css]')) {
-      let mapcss = document.createElement('link');
-      mapcss.setAttribute('rel', 'stylesheet');
-      mapcss.setAttribute('href', './css/map.css');
-      mapcss.setAttribute('data-map-css', '');
-      document.getElementsByTagName('head')[0].appendChild(mapcss);
-    }
+  function setMapCss() {
+    let cssLink = document.getElementById('stylesheet');
+    console.log(cssLink);
+    const cssPath = GPRandomizer.BoardState.thelostfleet ? './css/mapF.css' : './css/map.css';
+    cssLink.href = `${cssPath}?v=${Date.now()}`;
   }
 
   //
   // generate random map
   //
   function generateRandomMap(players, preset) {
-    addMapCss();
+    setMapCss();
     GPRandomizer.Map.resizeMapVerticalGridLength();
     let presetTiles;
     let presetDegree; 
-    let ignoreSpace = {
+    let ignoreSpace = GPRandomizer.BoardState.thelostfleet ? {
+      "2": [2, 6, 9],
+      "3": [6],
+      "4": []
+    } : {
       "2": [2, 6, 9],
       "3": [2, 6],
       "4": []
     };
+    // console.log(players/2);
+    // console.log(ignoreSpace);
+    // console.log(ignoreSpace[players.toString()]);
+    let tiles;
+    GPRandomizer.BoardState.map = [];
     if (preset) {
       console.log('[generateRandomMap]', 'preset=', preset);
       let args = preset.split(',');
@@ -361,23 +392,47 @@ window.addEventListener('load', function() {
       console.log('[generateRandomMap]', 'presetTiles=', presetTiles);
       console.log('[generateRandomMap]', 'presetDegree=', presetDegree);
     }
-    let tiles = shuffle(SPACESECTORS[players], presetTiles);
+    if (GPRandomizer.BoardState.thelostfleet) {
+      let centerTiles = shuffle(SPACESECTORS[players].slice(0,4));
+      let tailTiles = shuffle(centerTiles.slice(Math.floor(players/2)).concat((SPACESECTORS[players].slice(4))));
+      let rN = Number(players) + Math.round(1.8/players);
+      console.log("abc " + rN);
+      tiles = tailTiles.slice(0,rN).concat(centerTiles.slice(0,Math.floor(players/2))).concat(tailTiles.slice(rN))
+      console.log(tiles)
+    } else{
+      tiles = shuffle(SPACESECTORS[players], presetTiles);
+    }
+    let tile;
     Array.prototype.forEach.call(
       document.querySelectorAll('img[data-generator-type="map"]'),
       function(element, index) {
         element.parentElement.className = 'mapItem mapTile' + index + '-' + players + 'er';
+        // console.log(ignoreSpace[players]);
+        
         if (-1 != ignoreSpace[players].indexOf(index)) {
-          return true;
-        }
+          console.log(index);
+          console.log(GPRandomizer.BoardState.map);
+          console.log(element);
+          element.style.display = "none";
+          // return true;
+        } else {
+        // console.log("outout");
         let degree = Math.floor(Math.random() * 6) * 60;
-        let tile = tiles.shift();
+        tile = tiles.shift();
+        // if(GPRandomizer.BoardState.thelostfleet && index > 3 && index < 3 + Math.floor(players/2)) {
+          
+        // } else {
+          
+        // }
         if (presetDegree) {
           degree = presetDegree.shift();
         }
         element.setAttribute('src', tile);
         element.setAttribute('data-map-index', index);
         element.style.transform = 'rotate(' + degree + 'deg)';
+        element.style.removeProperty('display');
         GPRandomizer.BoardState.map.push(SPACESECTORS[players].indexOf(tile), degree);
+      }
       }
     );
   }
@@ -414,7 +469,7 @@ window.addEventListener('load', function() {
       args = parseHashbang(location.hash);
     }
 
-    GPRandomizer.BoardState.clearBoardState();
+    // GPRandomizer.BoardState.clearBoardState();
 
     if (args.PLAYERS) {
       GPRandomizer.Menu.players(args.PLAYERS);
@@ -445,6 +500,7 @@ window.addEventListener('load', function() {
         args.MAP
       );
     }
+    generateRandomMap(GPRandomizer.Menu.players());
   }
 
   //
@@ -494,10 +550,23 @@ window.addEventListener('load', function() {
     })();
   });
 
-  document.getElementById('lostfleet').addEventListener('click', function() {
+  losFunc = function() {
+    SPACESECTORS[3] = [
+      'pic/1' + IMG_SUFFIX,
+      'pic/2' + IMG_SUFFIX,
+      'pic/3' + IMG_SUFFIX,
+      'pic/4' + IMG_SUFFIX,
+      'pic/5_' + IMG_SUFFIX,
+      'pic/6_' + IMG_SUFFIX,
+      'pic/7_' + IMG_SUFFIX,
+      'pic/9' + IMG_SUFFIX,
+      'pic/10' + IMG_SUFFIX,
+    ];
     document.getElementById('lostfleet').style.background = "yellow";
     // document.getElementById('basegame').style.background = "none";
     document.getElementById('basegame').style.removeProperty('background');
+    GPRandomizer.BoardState.thelostfleet = true;
+    
      ROUNDBOOSTERS = [
       "pic/BOOdsc" + IMG_SUFFIX,
       "pic/BOOgai" + IMG_SUFFIX,
@@ -538,10 +607,51 @@ window.addEventListener('load', function() {
       "pic/ADVtrsV" + IMG_SUFFIX,
       "pic/ADVtyp" + IMG_SUFFIX
     ];
+
+    FINALSCORES = [
+      "pic/FIN11typ" + IMG_SUFFIX,
+      "pic/FINast" + IMG_SUFFIX,
+      "pic/FINdsc" + IMG_SUFFIX,
+      "pic/FINdst" + IMG_SUFFIX,
+      "pic/FINbld" + IMG_SUFFIX,
+      "pic/FINfed" + IMG_SUFFIX,
+      "pic/FINgai" + IMG_SUFFIX,
+      "pic/FINsat" + IMG_SUFFIX,
+      "pic/FINsec" + IMG_SUFFIX,
+      "pic/FINtyp" + IMG_SUFFIX
+    ];
+
+    ROUNDSCORES = [
+      "pic/RNDfed" + IMG_SUFFIX,
+      "pic/RNDgai3" + IMG_SUFFIX,
+      "pic/RNDgai4" + IMG_SUFFIX,
+      "pic/RNDmin" + IMG_SUFFIX,
+      "pic/RNDminS" + IMG_SUFFIX,
+      "pic/RNDlab" + IMG_SUFFIX,
+      "pic/RNDpia" + IMG_SUFFIX,
+      "pic/RNDstp" + IMG_SUFFIX,
+      "pic/RNDter" + IMG_SUFFIX,
+      "pic/RNDtyp" + IMG_SUFFIX,
+      "pic/RNDtrs3" + IMG_SUFFIX,
+      "pic/RNDtrs4" + IMG_SUFFIX
+    ];
     setup();
-  });
+  };
+
+  document.getElementById('lostfleet').addEventListener('click', losFunc);
 
   document.getElementById('basegame').addEventListener('click', function() {
+    SPACESECTORS[3] = [
+      'pic/1' + IMG_SUFFIX,
+      'pic/2' + IMG_SUFFIX,
+      'pic/3' + IMG_SUFFIX,
+      'pic/4' + IMG_SUFFIX,
+      'pic/5' + IMG_SUFFIX,
+      'pic/6' + IMG_SUFFIX,
+      'pic/7' + IMG_SUFFIX,
+      'pic/8' + IMG_SUFFIX,
+    ];
+    GPRandomizer.BoardState.thelostfleet = false;
     document.getElementById('lostfleet').style.removeProperty('background');
     // document.getElementById('lostfleet').style.background = "none";
     document.getElementById('basegame').style.background = "yellow";
@@ -576,6 +686,28 @@ window.addEventListener('load', function() {
       "pic/ADVtrsV" + IMG_SUFFIX,
       "pic/ADVtyp" + IMG_SUFFIX
     ];
+
+    FINALSCORES = [
+      "pic/FINbld" + IMG_SUFFIX,
+      "pic/FINfed" + IMG_SUFFIX,
+      "pic/FINgai" + IMG_SUFFIX,
+      "pic/FINsat" + IMG_SUFFIX,
+      "pic/FINsec" + IMG_SUFFIX,
+      "pic/FINtyp" + IMG_SUFFIX
+    ];
+
+    ROUNDSCORES = [
+      "pic/RNDfed" + IMG_SUFFIX,
+      "pic/RNDgai3" + IMG_SUFFIX,
+      "pic/RNDgai4" + IMG_SUFFIX,
+      "pic/RNDmin" + IMG_SUFFIX,
+      "pic/RNDpia" + IMG_SUFFIX,
+      "pic/RNDstp" + IMG_SUFFIX,
+      "pic/RNDter" + IMG_SUFFIX,
+      "pic/RNDtrs3" + IMG_SUFFIX,
+      "pic/RNDtrs4" + IMG_SUFFIX
+    ];
+
     setup();
   });
 
@@ -687,9 +819,10 @@ window.addEventListener('load', function() {
 
     mime.setAttribute('src', srcList[index]);
     mime.style.position = "relative";
-    mime.style.width = (document.getElementById('map').clientWidth / 20 / 1.5)  + "px";
+    let colFactor = GPRandomizer.BoardState.thelostfleet ? 29 : 20;
+    mime.style.width = (document.getElementById('map').clientWidth / colFactor / 2)  + "px";
     mime.style.top = 0 + "px";
-    mime.style.left = 0 + "px";
+    mime.style.right = 0 + "px";
     mime.style.msGridColumn = "1";
     mime.style.msGridRow = "1";
     mime.style.gridColumn = "1";
@@ -701,6 +834,6 @@ window.addEventListener('load', function() {
     mime.addEventListener('mouseup', onMouseEnd);
     mime.addEventListener('touchend', onMouseEnd);
   });
-
+  losFunc();
   setup(true);
 });

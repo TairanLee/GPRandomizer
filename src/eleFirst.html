@@ -23,7 +23,6 @@
   <link rel="icon" type="image/x-icon" href="./favicon.ico">
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./image/GPRandomizer_192px.png">
-  <link rel="stylesheet" id="stylesheet" href="./css/map.css" />
   <script>
     if (navigator.serviceWorker) {
       navigator.serviceWorker.register('./serviceworker.js', { scope: "." }).then(function (register) {
@@ -161,6 +160,14 @@
       text-align: center;
     }
 
+    #map {
+      margin: 0px;
+      display: -ms-grid;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
   </style>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-21068290-3"></script>
@@ -198,61 +205,11 @@
         <button id="basegame" type="button">BaseGame</button>
       </div>
       <div>
-        <button id="lostfleet" type="button">TheLostFleet</button>
+        <button id="lostfleet" type="button" style="background-color:none;">TheLostFleet</button>
       </div>
     </div>
   </menu>
   <main>
-
-    <section>
-      <div class="mapWrapper">
-        <div id="mapGenMenu">
-        <p>
-          <button id="mapGen" class="mapMenu" type="button">Generate Random Map
-            <br>(experimental & heavy)</button>
-          <span>&nbsp;</span>
-          <button id="mineGen" class="mapMenu" type="button">Generate Mine
-            <br>(experimental)</button>
-        </p>
-        <p>you can rotate each space tiles to click them.<br>Mine can be moved drag&amp;drop and be changed color by clicking.</p> 
-        </div>
-        <div id="map">
-          <div id="mapTile0" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile1" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile2" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile3" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile4" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile5" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile6" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile7" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile8" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile9" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-        </div>
-        <div id="buildTiles" class="mapItem">
-        </div>
-      </div>
-    </section>
-
     <section>
     <table id="GPBoard">
       <tr>
@@ -368,7 +325,54 @@
       </div>
     </div>
     </section>
-
+    <section>
+    <div class="mapWrapper">
+      <div id="mapGenMenu">
+      <p>
+        <button id="mapGen" class="mapMenu" type="button">Generate Random Map
+          <br>(experimental & heavy)</button>
+        <span>&nbsp;</span>
+        <button id="mineGen" class="mapMenu" type="button">Generate Mine
+          <br>(experimental)</button>
+      </p>
+      <p>you can rotate each space tiles to click them.<br>Mine can be moved drag&amp;drop and be changed color by clicking.</p> 
+      </div>
+      <div id="map">
+        <div id="mapTile0" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile1" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile2" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile3" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile4" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile5" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile6" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile7" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile8" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+        <div id="mapTile9" class="mapItem">
+          <img data-generator-type="map" src="">
+        </div>
+      </div>
+      <div id="buildTiles" class="mapItem">
+      </div>
+    </div>
+    </section>
   </main>
   <script async src="./js/randomizer.js"></script>
 </body>

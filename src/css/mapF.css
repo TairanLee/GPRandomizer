@@ -1,0 +1,173 @@
+#map {
+    margin: 0px;
+    display: -ms-grid;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(58, 1fr);
+    /* -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+}
+
+.mapTile0-4er {
+    grid-column: 19 / span 16;
+    grid-row: 1 / span 10;
+}
+
+.mapTile1-4er {
+    grid-column: 31 / span 16;
+    grid-row: 7 / span 10;
+}
+
+.mapTile2-4er {
+    grid-column: 43 / span 16;
+    grid-row: 13 / span 10 ;
+}
+
+/* 2nd Row */
+.mapTile3-4er {
+    grid-column: 4 / span 16;
+    grid-row: 4 / span 10;
+}
+
+.mapTile4-4er {
+    grid-column: 16 / span 16;
+    grid-row: 10 / span 10;
+}
+
+.mapTile5-4er {
+    grid-column: 28 / span 16;
+    grid-row: 16 / span 10;
+}
+
+.mapTile6-4er {
+    grid-column: 40 / span 16;
+    grid-row: 22 / span 10;
+}
+
+/* 3rd Row */
+.mapTile7-4er {
+    grid-column: 1 / span 16;
+    grid-row: 13;
+}
+
+.mapTile8-4er {
+    grid-column: 13 / span 16;
+    grid-row: 19;
+}
+
+.mapTile9-4er {
+    grid-column: 25 / span 16;
+    grid-row: 25 / span 10;
+}
+
+
+/* For 3 players */
+/* 1st Row */
+.mapTile0-3er {
+    grid-column: 19 / span 16;
+    grid-row: 1 / span 10;
+}
+
+.mapTile1-3er {
+    grid-column: 31 / span 16;
+    grid-row: 7 / span 10;
+}
+
+.mapTile2-3er {
+    grid-column: 43 / span 16;
+    grid-row: 13 / span 10 ;
+}
+
+/* 2nd Row */
+.mapTile3-3er {
+    grid-column: 4 / span 16;
+    grid-row: 4 / span 10;
+}
+
+.mapTile4-3er {
+    grid-column: 16 / span 16;
+    grid-row: 10 / span 10;
+}
+
+.mapTile5-3er {
+    grid-column: 28 / span 16;
+    grid-row: 16 / span 10;
+}
+
+/* .mapTile6-3er {
+    grid-column: 40 / span 16;
+    grid-row: 22 / span 10;
+} */
+
+/* 3rd Row */
+.mapTile7-3er {
+    grid-column: 1 / span 16;
+    grid-row: 13;
+}
+
+.mapTile8-3er {
+    grid-column: 13 / span 16;
+    grid-row: 19;
+}
+
+.mapTile9-3er {
+    grid-column: 25 / span 16;
+    grid-row: 25 / span 10;
+}
+
+/* For 2 players */
+
+.mapTile0-2er {
+    grid-column: 19 / span 16;
+    grid-row: 1 / span 10;
+}
+
+.mapTile1-2er {
+    grid-column: 31 / span 16;
+    grid-row: 7 / span 10;
+}
+
+.mapTile2-2er {
+    grid-column: 43 / span 16;
+    grid-row: 13 / span 10 ;
+    /* display: none; */
+}
+
+/* 2nd Row */
+.mapTile3-2er {
+    grid-column: 4 / span 16;
+    grid-row: 4 / span 10;
+}
+
+.mapTile4-2er {
+    grid-column: 16 / span 16;
+    grid-row: 10 / span 10;
+}
+
+.mapTile5-2er {
+    grid-column: 28 / span 16;
+    grid-row: 16 / span 10;
+}
+
+.mapTile6-2er {
+    grid-column: 40 / span 16;
+    grid-row: 22 / span 10;
+    display: none;
+}
+
+/* 3rd Row */
+.mapTile7-2er {
+    grid-column: 1 / span 16;
+    grid-row: 13;
+}
+
+.mapTile8-2er {
+    grid-column: 13 / span 16;
+    grid-row: 19;
+}
+
+.mapTile9-2er {
+    /* display: none; */
+    opacity: 0;
+    grid-column: 25 / span 16;
+    grid-row: 25 / span 10;
+}

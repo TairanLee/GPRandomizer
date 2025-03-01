@@ -17,6 +17,7 @@ const STATIC_FILES = [
   URL + '/',
   URL + '/js/randomizer.js',
   URL + '/css/map.css',
+  URL + '/css/mapF.css',
   URL + '/pic/ADVfedP' + IMG_SUFFIX,
   URL + '/pic/ADVfedV' + IMG_SUFFIX,
   URL + '/pic/ADVgai' + IMG_SUFFIX,
