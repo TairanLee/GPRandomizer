@@ -28,6 +28,7 @@ GPRandomizer.BoardState = (function () {
     advancedTechs: [],
     basicTechs: [],
     roundScores: [],
+    factions: [],
     finalScores: [],
     roundBoosters: [],
     map: [],
@@ -39,6 +40,7 @@ GPRandomizer.BoardState = (function () {
         'ADV=' + this.advancedTechs.join(','),
         'BAS=' + this.basicTechs.join(','),
         'RND=' + this.roundScores.join(','),
+        'FAC=' + this.factions.join(','),
         'FIN=' + this.finalScores.join(','),
         'BOO=' + this.roundBoosters.join(','),
         'MAP=' + this.map.join(','),
@@ -53,6 +55,7 @@ GPRandomizer.BoardState = (function () {
       this.advancedTechs = [];
       this.basicTechs = [];
       this.roundScores = [];
+      this.factions = [];
       this.finalScores = [];
       this.roundBoosters = [];
       this.map = [];
@@ -176,6 +179,23 @@ window.addEventListener('load', function() {
     "pic/BOOtrs" + IMG_SUFFIX
   ];
 
+  const FACTIONS = [
+    'pic/FACterraner' + IMG_SUFFIX, 
+    'pic/FAClantida' + IMG_SUFFIX, 
+    'pic/FAChadschhalla' + IMG_SUFFIX, 
+    'pic/FACderschwarm' + IMG_SUFFIX, 
+    'pic/FACgeoden' + IMG_SUFFIX, 
+    'pic/FACbaltak' + IMG_SUFFIX, 
+    'pic/FACxenos' + IMG_SUFFIX, 
+    'pic/FACgleen' + IMG_SUFFIX, 
+    'pic/FACtaklons' + IMG_SUFFIX, 
+    'pic/FACambas' + IMG_SUFFIX, 
+    'pic/FACfiraks' + IMG_SUFFIX, 
+    'pic/FACmadandroids' + IMG_SUFFIX, 
+    'pic/FACnevlar' + IMG_SUFFIX, 
+    'pic/FACitar' + IMG_SUFFIX
+  ];
+
   var FINALSCORES = [
     "pic/FINbld" + IMG_SUFFIX,
     "pic/FINfed" + IMG_SUFFIX,
@@ -237,6 +257,28 @@ window.addEventListener('load', function() {
       nlist[i] = t;
     }
     return nlist;
+  }
+
+  //
+  // setup Factions;
+  //
+  function setupFactions(args) {
+    let indlist = [];
+    for (let i = 0; i <= 6; i++) {
+        indlist.push(i * 2 + Math.round(Math.random()));
+    }
+    console.log(indlist);
+    var preset = args ? args.split(',') : [];
+    var faclist = shuffle(indlist, preset);
+    Array.prototype.forEach.call(
+      document.querySelectorAll('[data-generator-type="fac"]'),
+      function(e, i) {
+        e.setAttribute('src', FACTIONS[faclist[i]]);
+        GPRandomizer.BoardState.factions.push(
+          FACTIONS.indexOf(FACTIONS[faclist[i]])
+        );
+      }
+    );
   }
 
   //
@@ -475,6 +517,9 @@ window.addEventListener('load', function() {
       GPRandomizer.Menu.players(args.PLAYERS);
     }
     GPRandomizer.BoardState.players = GPRandomizer.Menu.players();
+
+    // setupFac
+    setupFactions(args.FAC);
 
     // setupFed
     setupFederation(args.FED);

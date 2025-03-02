@@ -205,55 +205,30 @@
   <main>
 
     <section>
-      <div class="mapWrapper">
-        <div id="mapGenMenu">
-        <p>
-          <button id="mapGen" class="mapMenu" type="button">Generate Random Map
-            <br>(click tile to rotate)</button>
-          <span>&nbsp;</span>
-          <button id="mineGen" class="mapMenu" type="button">Generate Mine
-            <br>(click / drag&amp;drop)</button>
-        </p>
-        </div>
-        <div id="map">
-          <div id="mapTile0" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile1" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile2" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile3" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile4" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile5" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile6" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile7" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile8" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-          <div id="mapTile9" class="mapItem">
-            <img data-generator-type="map" src="">
-          </div>
-        </div>
-        <div id="buildTiles" class="mapItem">
-        </div>
-      </div>
-    </section>
-
-    <section>
     <table id="GPBoard">
+      <tr>
+        <td align="center" style="background-color:#000000">
+          <img data-generator-type="fac" id="FAC0" style="height:80%;max-width:80%;" src="pic/FACtaklons.png">
+        </td>
+        <td align="center" style="background-color:#000000">
+          <img data-generator-type="fac" id="FAC1" style="height:80%;max-width:80%;" src="pic/FACfiraks.png">
+        </td>
+        <td align="center" style="background-color:#000000">
+          <img data-generator-type="fac" id="FAC2" style="height:80%;max-width:80%;"
+            src="pic/FAChadschhalla.png"></td>
+        <td align="center" style="background-color:#000000">
+          <img data-generator-type="fac" id="FAC3" style="height:80%;max-width:80%;" src="pic/FACnevlar.png">
+        </td>
+        <td align="center" style="background-color:#000000">
+          <img data-generator-type="fac" id="FAC4" style="height:80%;max-width:80%;" src="pic/FACgeoden.png">
+        </td>
+        <td align="center" style="background-color:#000000">
+          <img data-generator-type="fac" id="FAC5" style="height:80%;max-width:80%;" src="pic/FACterraner.png">
+        </td>
+        <td align="center" style="background-color:#000000">
+          <img data-generator-type="fac" id="FAC6" style="height:80%;max-width:80%;" src="pic/FACxenos.png">
+        </td>
+      </tr>
       <tr>
         <td rowspan="2" class="terraformTech">
           <img data-generator-type="fed" id="FED" src="">
@@ -367,6 +342,56 @@
       </div>
     </div>
     </section>
+
+
+    <section>
+      <div class="mapWrapper">
+        <div id="mapGenMenu">
+        <p>
+          <button id="mapGen" class="mapMenu" type="button">Generate Random Map
+            <br>(click tile to rotate)</button>
+          <span>&nbsp;</span>
+          <button id="mineGen" class="mapMenu" type="button">Generate Mine
+            <br>(click / drag&amp;drop)</button>
+        </p>
+        </div>
+        <div id="map">
+          <div id="mapTile0" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile1" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile2" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile3" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile4" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile5" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile6" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile7" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile8" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+          <div id="mapTile9" class="mapItem">
+            <img data-generator-type="map" src="">
+          </div>
+        </div>
+        <div id="buildTiles" class="mapItem">
+        </div>
+      </div>
+    </section>
+
 
   </main>
   <script async src="./js/randomizer.js"></script>
