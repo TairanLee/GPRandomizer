@@ -92,10 +92,12 @@ GPRandomizer.Map = {
     if (GPRandomizer.BoardState.thelostfleet) {
       gridWidth = Math.floor((map.clientWidth / 29) / 2);
       gridHeight = Math.ceil(Math.sqrt(3) * ((map.clientWidth / 29) / 2));
+      // gridHeight = Math.ceil(Math.sqrt(3) * gridWidth);
       // map.style.gridTemplateColumns = "repeat(58, 1fr);";
-      map.style.gridTemplateRows = (gridHeight + 'px ').repeat(34);
-      map.style.gridTemplateColumns = "repeat(auto-fill, " + gridWidth + "px);";
-      map.style.setProperty('-ms-grid-rows', (gridHeight + 'px').repeat(34));
+      map.style.gridTemplateRows = (gridHeight + 'px ').repeat(32);
+      // map.style.gridTemplateColumns = "repeat(auto-fill, " + gridWidth + "px);";
+      map.style.gridTemplateColumns = "repeat(58, " + gridWidth + "px);";
+      map.style.setProperty('-ms-grid-rows', (gridHeight + 'px').repeat(32));
     } else {
       console.log(GPRandomizer.BoardState.thelostfleet);
       gridHeight = Math.ceil((map.clientWidth / 20) / 2);
@@ -421,10 +423,9 @@ window.addEventListener('load', function() {
       "3": [2, 6],
       "4": []
     };
-    // console.log(players/2);
-    // console.log(ignoreSpace);
-    // console.log(ignoreSpace[players.toString()]);
     let tiles;
+    let tlfTiles = shuffle(Array.from({length:8}, (v, x) => (11 + x) + (Math.round(Math.random()) ? '_' : '')));
+    console.log(tlfTiles);
     GPRandomizer.BoardState.map = [];
     if (preset) {
       console.log('[generateRandomMap]', 'preset=', preset);
@@ -448,35 +449,36 @@ window.addEventListener('load', function() {
     Array.prototype.forEach.call(
       document.querySelectorAll('img[data-generator-type="map"]'),
       function(element, index) {
-        element.parentElement.className = 'mapItem mapTile' + index + '-' + players + 'er';
-        // console.log(ignoreSpace[players]);
-        
+        element.parentElement.className = 'mapItem mapTile' + index + '-' + players + 'er'; 
         if (-1 != ignoreSpace[players].indexOf(index)) {
           console.log(index);
           console.log(GPRandomizer.BoardState.map);
           console.log(element);
           element.style.display = "none";
-          // return true;
         } else {
-        // console.log("outout");
-        let degree = Math.floor(Math.random() * 6) * 60;
-        tile = tiles.shift();
-        // if(GPRandomizer.BoardState.thelostfleet && index > 3 && index < 3 + Math.floor(players/2)) {
-          
-        // } else {
-          
-        // }
-        if (presetDegree) {
-          degree = presetDegree.shift();
-        }
-        element.setAttribute('src', tile);
-        element.setAttribute('data-map-index', index);
-        element.style.transform = 'rotate(' + degree + 'deg)';
-        element.style.removeProperty('display');
-        GPRandomizer.BoardState.map.push(SPACESECTORS[players].indexOf(tile), degree);
+          let degree;
+          if (index < 10) {
+            degree = Math.floor(Math.random() * 6) * 60;
+            tile = tiles.shift();
+          } else {
+            degree = Math.floor(Math.random() * 3) * 120 + index % 2 * 60;
+            tile = 'pic/' + tlfTiles.shift() + IMG_SUFFIX;
+            element.style.transformOrigin = '42.8571% 50%';
+          }
+          if (presetDegree) {
+            degree = presetDegree.shift();
+          }
+          element.setAttribute('src', tile);
+          element.setAttribute('data-map-index', index);
+          // if (index > 9 ) {
+          //   element.style.transform-origin 
+          // }
+          element.style.transform = 'rotate(' + degree + 'deg)';
+          element.style.removeProperty('display');
+          GPRandomizer.BoardState.map.push(SPACESECTORS[players].indexOf(tile), degree);
       }
-      }
-    );
+    });
+
   }
 
   //
