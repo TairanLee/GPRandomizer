@@ -461,21 +461,24 @@ window.addEventListener('load', function() {
             degree = Math.floor(Math.random() * 6) * 60;
             tile = tiles.shift();
           } else {
+
             degree = Math.floor(Math.random() * 3) * 120 + index % 2 * 60;
             tile = 'pic/' + tlfTiles.shift() + IMG_SUFFIX;
             element.style.transformOrigin = '42.8571% 50%';
           }
-          if (presetDegree) {
-            degree = presetDegree.shift();
+          if (!GPRandomizer.BoardState.thelostfleet && index > 9) element.style.display = "none"; else {
+            if (presetDegree) {
+              degree = presetDegree.shift();
+            }
+            element.setAttribute('src', tile);
+            element.setAttribute('data-map-index', index);
+            // if (index > 9 ) {
+            //   element.style.transform-origin 
+            // }
+            element.style.transform = 'rotate(' + degree + 'deg)';
+            element.style.removeProperty('display');
+            GPRandomizer.BoardState.map.push(SPACESECTORS[players].indexOf(tile), degree); 
           }
-          element.setAttribute('src', tile);
-          element.setAttribute('data-map-index', index);
-          // if (index > 9 ) {
-          //   element.style.transform-origin 
-          // }
-          element.style.transform = 'rotate(' + degree + 'deg)';
-          element.style.removeProperty('display');
-          GPRandomizer.BoardState.map.push(SPACESECTORS[players].indexOf(tile), degree);
       }
     });
 
