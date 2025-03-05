@@ -466,7 +466,8 @@ window.addEventListener('load', function() {
             tile = 'pic/' + tlfTiles.shift() + IMG_SUFFIX;
             element.style.transformOrigin = '42.8571% 50%';
           }
-          if (!GPRandomizer.BoardState.thelostfleet && index > 9) element.style.display = "none"; else {
+          if ((!GPRandomizer.BoardState.thelostfleet && index > 9) || (players == 2 && index > 15)) 
+            element.style.display = "none"; else {
             if (presetDegree) {
               degree = presetDegree.shift();
             }

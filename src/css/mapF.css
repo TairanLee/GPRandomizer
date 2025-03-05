@@ -267,3 +267,45 @@
     grid-column: 25 / span 16;
     grid-row: 25 / span 10;
 }
+
+
+/* Deep Space Sectors */
+.mapTile10-2er {
+    grid-column: 34 / span 7;
+    grid-row: 4 / span 4;
+}
+
+.mapTile11-2er {
+    grid-column: 14 / span 7;
+    grid-row: 2 / span 4;
+}
+
+.mapTile12-2er {
+    grid-column: 28 / span 7;
+    grid-row: 24 / span 4;
+}
+
+.mapTile13-2er {
+    grid-column: 40 / span 7;
+    grid-row: 15 / span 4;
+}
+
+.mapTile14-2er {
+    grid-column: 1 / span 7;
+    grid-row: 11 / span 4;
+}
+
+.mapTile15-2er {
+    grid-column: 8 / span 7;
+    grid-row: 22 / span 4;
+}
+
+/* .mapTile16-2er {
+    grid-column: 40 / span 7;
+    grid-row: 30 / span 4;
+}
+
+.mapTile17-2er {
+    grid-column: 20 / span 7;
+    grid-row: 28 / span 4;
+} */
