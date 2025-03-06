@@ -3,7 +3,7 @@
     display: -ms-grid;
     display: grid;
     grid-auto-flow: dense;
-    grid-template-columns: repeat(58, 1fr);
+    grid-template-columns: repeat(59, 1fr);
     /* -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
 }
 
@@ -81,7 +81,7 @@
 }
 
 .mapTile13-4er {
-    grid-column: 52 / span 7;
+    grid-column: 53 / span 7;
     grid-row: 21 / span 4;
     /* transform-origin: 42.8571% 50%; */
 }
@@ -286,7 +286,7 @@
 }
 
 .mapTile13-2er {
-    grid-column: 40 / span 7;
+    grid-column: 41 / span 7;
     grid-row: 15 / span 4;
 }
 

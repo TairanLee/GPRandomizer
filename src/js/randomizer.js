@@ -90,8 +90,10 @@ GPRandomizer.Map = {
     let gridHeight;
     let gridWidth;
     if (GPRandomizer.BoardState.thelostfleet) {
-      gridWidth = Math.floor((map.clientWidth / 29) / 2);
-      gridHeight = Math.ceil(Math.sqrt(3) * ((map.clientWidth / 29) / 2));
+      // gridWidth = Math.floor((map.clientWidth / 29) / 2);
+      gridWidth = Math.floor(map.clientWidth / 59);
+      // gridHeight = Math.ceil(Math.sqrt(3) * ((map.clientWidth / 29) / 2));
+      gridHeight = Math.ceil(Math.sqrt(3) * (map.clientWidth / 59));
       // gridHeight = Math.ceil(Math.sqrt(3) * gridWidth);
       // map.style.gridTemplateColumns = "repeat(58, 1fr);";
       map.style.gridTemplateRows = (gridHeight + 'px ').repeat(32);
@@ -439,9 +441,9 @@ window.addEventListener('load', function() {
       let centerTiles = shuffle(SPACESECTORS[players].slice(0,4));
       let tailTiles = shuffle(centerTiles.slice(Math.floor(players/2)).concat((SPACESECTORS[players].slice(4))));
       let rN = Number(players) + Math.round(1.8/players);
-      console.log("abc " + rN);
+      // console.log("abc " + rN);
       tiles = tailTiles.slice(0,rN).concat(centerTiles.slice(0,Math.floor(players/2))).concat(tailTiles.slice(rN))
-      console.log(tiles)
+      // console.log(tiles)
     } else{
       tiles = shuffle(SPACESECTORS[players], presetTiles);
     }
@@ -451,9 +453,9 @@ window.addEventListener('load', function() {
       function(element, index) {
         element.parentElement.className = 'mapItem mapTile' + index + '-' + players + 'er'; 
         if (-1 != ignoreSpace[players].indexOf(index)) {
-          console.log(index);
-          console.log(GPRandomizer.BoardState.map);
-          console.log(element);
+          // console.log(index);
+          // console.log(GPRandomizer.BoardState.map);
+          // console.log(element);
           element.style.display = "none";
         } else {
           let degree;
