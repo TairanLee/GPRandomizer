@@ -778,8 +778,9 @@ window.addEventListener('load', function() {
     let deg = this.style.transform.match(/rotate\(([0-9]+)deg\)/);
     let newdeg = 60;
     let index = this.getAttribute('data-map-index');
+    let isTlfTile = this.getAttribute('src').match(/1[1-8](_)?(\-min)?\.(png|webp)$/g);
     if (deg) {
-      newdeg = Number(deg[1]) + 60;
+      newdeg = Number(deg[1]) + (isTlfTile ? 120 : 60);
       if (newdeg >= 360) {
         newdeg -= 360;
       }
